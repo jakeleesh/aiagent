@@ -1,4 +1,5 @@
 import os
+import sys
 from dotenv import load_dotenv
 from google import genai
 
@@ -8,8 +9,14 @@ def main():
 
     client = genai.Client(api_key=api_key)
 
+    # sys.argv is ['main.py', arg]
+    if len(sys.argv) < 2:
+        print("I need a prompt!")
+        sys.exit(1)
+    prompt = sys.argv[1]
+
     response = client.models.generate_content(
-        model="gemini-2.0-flash-001", contents="Is building an AI Agent good for learning backend development? Use one paragraph maximum."
+        model="gemini-2.0-flash-001", contents=prompt
     )
 
     print(response.text)
