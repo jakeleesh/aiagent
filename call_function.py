@@ -25,7 +25,7 @@ def call_function(function_call_part, verbose=False):
         result = write_file(WORKING_DIRECTORY, **function_call_part.args)
     if result == "":
         return types.Content(
-            role="tool",
+            role="user",
             parts=[
                 types.Part.from_function_response(
                     name=function_call_part.name,
@@ -35,7 +35,7 @@ def call_function(function_call_part, verbose=False):
         )
     else:
         return types.Content(
-            role="tool",
+            role="user",
             parts=[
                 types.Part.from_function_response(
                     name=function_call_part.name,
